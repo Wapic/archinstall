@@ -105,13 +105,14 @@ if [ $continue == "user" ]; then
     fi
     
     if [ $displayServer == "wayland" ]; then
-        pacman -S wayland hyprland wofi waybar swaybg swayimg wl-clipboard mako slurp grim
+        pacman -S wayland hyprland wofi waybar swaybg swayimg wl-clipboard mako slurp grim qt5-wayland qt6-wayland xdg-desktop-portal-hyprland
         echo -e '#! /bin/sh\nexec Hyprland' > /etc/lemurs/wayland/hyprland
         chmod 755 /etc/lemurs/wayland/hyprland
+        echo -e '--ozone-platform-hint=auto' > .config/electron-flags.conf
     fi
 
     echo 'installing essentials...'
-    pacman -S pipewire pcmanfm playerctl neofetch firefox kitty base-devel git openssh zip unzip jdk8-openjdk
+    pacman -S wireplumber pipewire pipewire-alsa pipewire-pulse pipewire-audio pcmanfm playerctl neofetch firefox kitty base-devel git openssh zip unzip jdk8-openjdk
 
     read -p 'install yay? [Y/N]' yay
     if [ $yay == "Y" -o $yay == "y" ]; then
