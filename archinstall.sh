@@ -99,6 +99,8 @@ if [ $continue == "user" ]; then
     echo 'installing login manager...'
     pacman -S lemurs
 
+    echo 'Wayland will install with Hyprland'
+    echo 'Xorg will install with i3-wm'
     read -p 'Display server? [x/wayland]' displayServer
     if [ $displayServer == "x" -o $displayServer == "xorg" ]; then
         pacman -S xorg i3-wm rofi polybar feh xclip dunst
@@ -109,6 +111,11 @@ if [ $continue == "user" ]; then
         echo -e '#! /bin/sh\nexec Hyprland' > /etc/lemurs/wayland/hyprland
         chmod 755 /etc/lemurs/wayland/hyprland
         echo -e '--ozone-platform-hint=auto' > .config/electron-flags.conf
+    fi
+
+    read -p 'Install laptop brightness control? [Y/N]' brtnessctl
+    if [ $brtnessctl == "Y" -o $brtnessctl == "y" ]; then
+        pacman -S brightnessctl
     fi
 
     echo 'installing essentials...'
