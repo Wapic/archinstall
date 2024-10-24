@@ -103,7 +103,7 @@ if [ $continue == "FULL" ]; then
         exit
 END
     rootPartition=$bootDrive"3"
-    rootUUID=$(sudo blkid /dev/nvme0n1p2 | grep -Eo "UUID=\".{36}\"\s" | grep -Eo ".{36}\b")
+    rootUUID=$(sudo blkid $rootPartition | grep -Eo "UUID=\".{36}\"\s" | grep -Eo ".{36}\b")
     echo -e '"Boot with standard options"  "ro root=UUID='$rootUUID'"\n"Boot to single-user mode"    "ro root=UUID='$rootUUID'   single"\n"Boot with minimal options"   "ro root=UUID='$rootUUID'"' > /mnt/boot/refind_linux.conf
     umount -R /mnt
     swapoff -a 
