@@ -31,11 +31,6 @@ if [ $continue == "FULL" ]; then
         echo 'passwords do not match!'
         exit 1
     fi
-
-    nvme=false
-    if [[ $bootDrive == *"nvme"* ]]; then
-        nvme=true
-    fi
     
     sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
     sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
@@ -47,7 +42,7 @@ if [ $continue == "FULL" ]; then
     echo -e 'size=1G, type=U\n size=8G, type=S\n size=+, type=L\n' | sfdisk $bootDrive
     
     # nvme partition names differ from other drives 
-    if [ $nvme == true ]; then
+    if [[ $bootDrive == *"nvme"* ]]; then
         bootDrive=$bootDrive"p" 
     fi
 
