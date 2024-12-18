@@ -14,7 +14,7 @@ dotfiles also include a script to install all the required packages and themes
 # Usage:
 ### 1. Download & run script:
 ```
-curl https://raw.githubusercontent.com/Wapic/archinstall/main/archinstall.sh -o archinstall.sh
+curl https://raw.githubusercontent.com/Wapic/archinstall/refs/heads/base-install/archinstall.sh -o archinstall.sh
 chmod +x archinstall.sh
 ./archinstall.sh
 ```
