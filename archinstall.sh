@@ -28,11 +28,6 @@ set_password
 read -p 'boot disk: ' bootDrive
 read -p 'hostname: ' hostname
 
-nvme=false
-if [[ $bootDrive == *"nvme"* ]]; then
-    nvme=true
-fi
-
 sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
@@ -47,7 +42,7 @@ sfdisk --delete $bootDrive
 echo -e 'size=1G, type=U\n size=8G, type=S\n size=+, type=L\n' | sfdisk $bootDrive
 
 # nvme partition names differ from other drives 
-if [ $nvme == true ]; then
+if [[ $bootDrive == *"nvme"* ]]; then
     bootDrive=$bootDrive"p" 
 fi
 
@@ -63,7 +58,7 @@ mount --mkdir $bootDrive"1" /mnt/boot
 swapon $bootDrive"2"
 
 # Install base packages required for the system including video drivers(AMD only)
-pacstrap /mnt base linux-zen dhcpcd iwd sudo man-db man-pages texinfo base-devel git refind linux-firmware amd-ucode iwd \
+pacstrap /mnt base linux-zen dhcpcd iwd sudo man-db man-pages texinfo base-devel git refind linux-firmware amd-ucode \
               mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau xf86-video-amdgpu
 
 # Generate fstab to automatically mount drives when booting the actual system
