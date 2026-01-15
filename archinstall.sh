@@ -66,6 +66,7 @@ genfstab -U /mnt > /mnt/etc/fstab
 
 # Generate system files
 echo -e "LANG=en_US.UTF-8
+LC_MESSAGES=en_US.UTF-8
 LC_NUMERIC=sv_SE.UTF-8
 LC_TIME=sv_SE.UTF-8
 LC_MONETARY=sv_SE.UTF-8
