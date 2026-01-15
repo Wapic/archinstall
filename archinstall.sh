@@ -59,7 +59,7 @@ swapon $bootDrive"2"
 
 # Install base packages required for the system including video drivers(AMD only)
 pacstrap /mnt base linux-zen dhcpcd iwd sudo man-db man-pages texinfo base-devel git refind linux-firmware amd-ucode \
-              mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau xf86-video-amdgpu
+              mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon lib32-libva-mesa-driver xf86-video-amdgpu
 
 # Generate fstab to automatically mount drives when booting the actual system
 genfstab -U /mnt > /mnt/etc/fstab
